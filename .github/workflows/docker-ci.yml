@@ -46,25 +46,25 @@ jobs:
       # ✅ Build and test Docker image
       - name: Build Docker image
         run: |
-          docker build -t my-fastapi-app:latest .
+          docker build -t postgres:latest .
 
       # ✅ Run tests inside the container
       - name: Run tests
         run: |
-          docker run --rm my-fastapi-app pytest
+          docker run --rm postgres pytest
 
       # ✅ Tag and push to Docker Hub
       - name: Push to Docker Hub
         run: |
-          docker tag my-fastapi-app:latest ${{ secrets.DOCKER_USERNAME }}/my-fastapi-app:${{ env.IMAGE_TAG }}
-          docker tag my-fastapi-app:latest ${{ secrets.DOCKER_USERNAME }}/my-fastapi-app:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/my-fastapi-app:${{ env.IMAGE_TAG }}
-          docker push ${{ secrets.DOCKER_USERNAME }}/my-fastapi-app:latest
+          docker tag postgres:latest ${{ secrets.DOCKER_USERNAME }}/postgres:${{ env.IMAGE_TAG }}
+          docker tag postgres:latest ${{ secrets.DOCKER_USERNAME }}/postgres:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/postgres:${{ env.IMAGE_TAG }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/postgres:latest
 
       # ✅ Tag and push to GHCR (Optional)
       - name: Push to GHCR
         run: |
-          docker tag my-fastapi-app:latest ghcr.io/${{ secrets.GHCR_USERNAME }}/my-fastapi-app:${{ env.IMAGE_TAG }}
-          docker tag my-fastapi-app:latest ghcr.io/${{ secrets.GHCR_USERNAME }}/my-fastapi-app:latest
-          docker push ghcr.io/${{ secrets.GHCR_USERNAME }}/my-fastapi-app:${{ env.IMAGE_TAG }}
-          docker push ghcr.io/${{ secrets.GHCR_USERNAME }}/my-fastapi-app:latest
+          docker tag postgres:latest ghcr.io/${{ secrets.GHCR_USERNAME }}/postgres:${{ env.IMAGE_TAG }}
+          docker tag postgres:latest ghcr.io/${{ secrets.GHCR_USERNAME }}/postgres:latest
+          docker push ghcr.io/${{ secrets.GHCR_USERNAME }}/postgres:${{ env.IMAGE_TAG }}
+          docker push ghcr.io/${{ secrets.GHCR_USERNAME }}/postgres:latest
