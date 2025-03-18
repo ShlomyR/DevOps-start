@@ -45,4 +45,5 @@ jobs:
             --registry-username $(az acr credential show --name mydevopsacr --query username --output tsv) \
             --registry-password $(az acr credential show --name mydevopsacr --query passwords[0].value --output tsv) \
             --dns-name-label my-fastapi-app \
-            --ports 8000
+            --ports 8000 \
+            --os-type Linux
