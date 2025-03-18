@@ -37,7 +37,7 @@ jobs:
 
       - name: Deploy to ACI
         run: |
-          az container create --resource-group shlomyGroupTestNew \
+          az container create --resource-group shlomyGroupTest \
             --name my-fastapi-container \
             --image mydevopsacr.azurecr.io/myapp:latest \
             --cpu 1 --memory 1 \
