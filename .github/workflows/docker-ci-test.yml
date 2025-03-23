@@ -42,8 +42,8 @@ jobs:
             --image devops1.azurecr.io/myapp:latest \
             --cpu 1 --memory 1 \
             --registry-login-server devops1.azurecr.io \
-            --registry-username $(az acr credential show --name devops1 --query username --output tsv) \
-            --registry-password $(az acr credential show --name devops1 --query passwords[0].value --output tsv) \
+            --registry-username ${{ secrets.AZURE_CLIENT_USER_NAME }} \
+            --registry-password ${{ secrets.AZURE_CLIENT_PASSWORD }} \
             --dns-name-label my-fastapi-app \
             --ports 8000 \
             --os-type Linux
