@@ -44,6 +44,5 @@ jobs:
             --registry-login-server devops1.azurecr.io \
             --registry-username ${{ secrets.AZURE_CLIENT_USER_NAME }} \
             --registry-password ${{ secrets.AZURE_CLIENT_PASSWORD }} \
-            
             --ports 8000 \
             --os-type Linux
