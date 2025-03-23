@@ -23,8 +23,8 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          docker build -t devopsTest.azurecr.io/myapp:latest .
-          docker push devopsTest.azurecr.io/myapp:latest
+          docker build -t devops1.azurecr.io/myapp:latest .
+          docker push devops1.azurecr.io/myapp:latest
 
   deploy:
     needs: build
@@ -39,11 +39,11 @@ jobs:
         run: |
           az container create --resource-group shlomyGroup \
             --name my-fastapi-container \
-            --image devopsTest.azurecr.io/myapp:latest \
+            --image devops.azurecr.io/myapp:latest \
             --cpu 1 --memory 1 \
-            --registry-login-server devopsTest.azurecr.io \
-            --registry-username $(az acr credential show --name devopsTest --query username --output tsv) \
-            --registry-password $(az acr credential show --name devopsTest --query passwords[0].value --output tsv) \
+            --registry-login-server devops.azurecr.io \
+            --registry-username $(az acr credential show --name devops --query username --output tsv) \
+            --registry-password $(az acr credential show --name devops --query passwords[0].value --output tsv) \
             --dns-name-label my-fastapi-app \
             --ports 8000 \
             --os-type Linux
