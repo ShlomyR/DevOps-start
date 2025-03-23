@@ -44,6 +44,6 @@ jobs:
             --registry-login-server devops1.azurecr.io \
             --registry-username ${{ secrets.AZURE_CLIENT_USER_NAME }} \
             --registry-password ${{ secrets.AZURE_CLIENT_PASSWORD }} \
-            --dns-name-label my-fastapi-app \
+            
             --ports 8000 \
             --os-type Linux
