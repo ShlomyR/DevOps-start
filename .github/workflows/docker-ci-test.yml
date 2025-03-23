@@ -39,11 +39,11 @@ jobs:
         run: |
           az container create --resource-group shlomyGroup \
             --name my-fastapi-container \
-            --image devops.azurecr.io/myapp:latest \
+            --image devops1.azurecr.io/myapp:latest \
             --cpu 1 --memory 1 \
-            --registry-login-server devops.azurecr.io \
-            --registry-username $(az acr credential show --name devops --query username --output tsv) \
-            --registry-password $(az acr credential show --name devops --query passwords[0].value --output tsv) \
+            --registry-login-server devops1.azurecr.io \
+            --registry-username $(az acr credential show --name devops1 --query username --output tsv) \
+            --registry-password $(az acr credential show --name devops1 --query passwords[0].value --output tsv) \
             --dns-name-label my-fastapi-app \
             --ports 8000 \
             --os-type Linux
