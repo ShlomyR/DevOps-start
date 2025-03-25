@@ -29,16 +29,10 @@ jobs:
     needs: build
     
     steps:
-      - name: Setup SSH Key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H 127.0.0.53 >> ~/.ssh/known_hosts
-          ls -la ~/.ssh
-          cat ~/.ssh/id_rsa  # Debugging: REMOVE THIS after testing!
-      - name: Test SSH Connection
-        run: ssh -i ~/.ssh/id_rsa -vvv ubuntu@127.0.0.53 "echo SSH authentication successful"
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-
-
+      - name: Deploy to production
+        run: ssh -o StrictHostKeyChecking=no ubuntu@server "cd /var/www/app && git pull && npm install && systemctl restart app"
