@@ -30,4 +30,5 @@ jobs:
     
     steps:
       - name: Deploy to production
-        run: ssh ubuntu@127.0.0.53 "cd /var/www/app && git pull && npm install && systemctl restart app"
+        run: ssh ubuntu@your-server-ip "cd /var/www/app && git pull && npm install && systemctl restart app"
+
