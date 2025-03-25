@@ -35,7 +35,10 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 127.0.0.53 >> ~/.ssh/known_hosts
-      - name: Deploy to production
-        run: ssh -i ~/.ssh/id_rsa ubuntu@127.0.0.53 "cd /var/www/app && git pull && npm install && systemctl restart app"
+          ls -la ~/.ssh
+          cat ~/.ssh/id_rsa  # Debugging: REMOVE THIS after testing!
+      - name: Test SSH Connection
+        run: ssh -i ~/.ssh/id_rsa -vvv ubuntu@127.0.0.53 "echo SSH authentication successful"
+
 
 
