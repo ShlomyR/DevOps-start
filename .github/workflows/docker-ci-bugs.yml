@@ -29,6 +29,13 @@ jobs:
     needs: build
     
     steps:
+      - name: Setup SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H your-server-ip >> ~/.ssh/known_hosts
       - name: Deploy to production
-        run: ssh ubuntu@your-server-ip "cd /var/www/app && git pull && npm install && systemctl restart app"
+        run: ssh -i ~/.ssh/id_rsa ubuntu@127.0.0.53 "cd /var/www/app && git pull && npm install && systemctl restart app"
+
 
