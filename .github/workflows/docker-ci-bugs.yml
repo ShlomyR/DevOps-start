@@ -22,7 +22,7 @@ jobs:
           registry: ghcr.io
           username: ${{ secrets.GHCR_USERNAME }}
           password: ${{ secrets.GHCR_TOKEN }}
-          run: git clone $GITHUB_REPOSITORY
+        run: git clone $GITHUB_REPOSITORY
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
