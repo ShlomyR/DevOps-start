@@ -45,7 +45,7 @@ jobs:
 
       - name: Deploy to production
         run: |
-          ssh -o StrictHostKeyChecking=no -i ${{ secrets.SSH_PRIVATE_KEY }} ubuntu@54.90.86.118 "
+          ssh -o StrictHostKeyChecking=no ubuntu@54.90.86.118 "
             sudo mkdir -p /var/www/app &&
             sudo chown ubuntu:ubuntu /var/www/app &&
             cd /var/www/app &&
