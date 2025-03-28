@@ -37,7 +37,7 @@ jobs:
       - name: Set up GitHub SSH key (for repository access)
         uses: webfactory/ssh-agent@v0.5.3
         with:
-          ssh-private-key: ${{ secrets.GITHUB_SSH_PRIVATE_KEY }}  # GitHub SSH key
+          ssh-private-key: ${{ secrets.GH_SSH_PRIVATE_KEY }}  # GitHub SSH key
 
       - name: Add GitHub to known hosts
         run: |
