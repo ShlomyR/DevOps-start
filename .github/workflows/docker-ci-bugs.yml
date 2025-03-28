@@ -34,6 +34,12 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+        - name: Add GitHub to known hosts
+          run: |
+            mkdir -p ~/.ssh
+            ssh-keyscan github.com >> ~/.ssh/known_hosts
+            chmod 644 ~/.ssh/known_hosts
+
       - name: Add EC2 instance to known hosts
         run: ssh-keyscan -H 54.90.86.118 >> ~/.ssh/known_hosts
 
@@ -42,7 +48,7 @@ jobs:
           sudo mkdir -p /var/www/app &&
           sudo chown ubuntu:ubuntu /var/www/app &&
           cd /var/www/app &&
-          if [ ! -d .git ]; then git clone git@github.com:your-username/your-repo.git .; fi &&
+          if [ ! -d .git ]; then git clone git@github.com:ShlomyR/DevOps-start.git .; fi &&
           git pull &&
           npm install &&
           sudo systemctl restart app"
