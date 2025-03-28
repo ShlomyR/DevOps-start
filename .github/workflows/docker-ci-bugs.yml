@@ -29,10 +29,15 @@ jobs:
     needs: build
     
     steps:
-      - name: Set up SSH
+      - name: Set up AWS SSH key (for EC2 access)
         uses: webfactory/ssh-agent@v0.5.3
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}  # AWS EC2 SSH key
+
+      - name: Set up GitHub SSH key (for repository access)
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.GITHUB_SSH_PRIVATE_KEY }}  # GitHub SSH key
 
       - name: Add GitHub to known hosts
         run: |
