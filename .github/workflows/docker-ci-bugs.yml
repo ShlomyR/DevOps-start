@@ -43,8 +43,7 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan -H ec2-54-226-202-57.compute-1.amazonaws.com >> ~/.ssh/known_hosts
 
-<<<<<<< HEAD
-     - name: Deploy to EC2
+      - name: Deploy to EC2
         run: ssh -o StrictHostKeyChecking=no -i ~/.ssh/my-ssh-key.pem ubuntu@ec2-54-226-202-57.compute-1.amazonaws.com "
           sudo mkdir -p /var/www/app &&
           sudo chown ubuntu:ubuntu /var/www/app &&
@@ -53,15 +52,5 @@ jobs:
           GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no' git pull &&
           npm install &&
           sudo systemctl restart app"
-=======
-      - name: Deploy to EC2
-          run: ssh -o StrictHostKeyChecking=no -i ~/.ssh/my-ssh-key.pem ubuntu@ec2-54-226-202-57.compute-1.amazonaws.com "
-            sudo mkdir -p /var/www/app &&
-            sudo chown ubuntu:ubuntu /var/www/app &&
-            cd /var/www/app &&
-            if [ ! -d .git ]; then git clone git@github.com:ShlomyR/DevOps-start.git .; fi &&
-            GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no' git pull &&
-            npm install &&
-            sudo systemctl restart app"
->>>>>>> ec50179 (fix 8)
+
 
