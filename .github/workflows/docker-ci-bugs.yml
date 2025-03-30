@@ -34,6 +34,7 @@ jobs:
 
       - name: Decode and set up SSH key
         run: |
+          mkdir -p ~/.ssh  # Ensure the .ssh directory exists
           echo "${{ secrets.SSH_PRIVATE_KEY }}" | base64 --decode > ~/.ssh/my-ssh-key.pem
           chmod 400 ~/.ssh/my-ssh-key.pem
 
