@@ -51,8 +51,7 @@ jobs:
           if [ ! -d .git ]; then git clone git@github.com:ShlomyR/DevOps-start.git .; fi &&
           GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no' git pull &&
           sudo apt update &&
-          sudo apt install -y curl &&
-          curl -fsSL https://deb.nodesource.com/setup_14.x | sudo -E bash - &&
+          sudo apt install -y npm &&
           sudo apt install -y nodejs &&
           sudo systemctl restart app"
 
