@@ -52,7 +52,6 @@ jobs:
           GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no' git pull &&
           sudo apt update &&
           sudo apt install -y npm &&
-          sudo apt install -y nodejs &&
-          sudo systemctl restart app"
+          sudo apt install -y nodejs"
 
 
