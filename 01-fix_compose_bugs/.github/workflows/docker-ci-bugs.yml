@@ -8,7 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -27,27 +27,19 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
-
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Decode and set up SSH key
-        run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" | base64 --decode > ~/.ssh/my-ssh-key.pem
-          chmod 400 ~/.ssh/my-ssh-key.pem
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Add EC2 instance to known hosts
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan -H ec2-54-226-202-57.compute-1.amazonaws.com >> ~/.ssh/known_hosts
+        run: ssh-keyscan -H 54.226.202.57 >> ~/.ssh/known_hosts
 
-      - name: Deploy to EC2
-        run: ssh -o StrictHostKeyChecking=no -i ~/.ssh/my-ssh-key.pem ubuntu@ec2-54-226-202-57.compute-1.amazonaws.com "
-          sudo mkdir -p /var/www/app &&
-          sudo chown ubuntu:ubuntu /var/www/app &&
+      - name: Deploy to production
+        run: ssh -o StrictHostKeyChecking=no ubuntu@54.226.202.57
           cd /var/www/app &&
-          if [ ! -d .git ]; then git clone git@github.com:your-username/your-repo.git .; fi &&
           git pull &&
           npm install &&
           sudo systemctl restart app"
