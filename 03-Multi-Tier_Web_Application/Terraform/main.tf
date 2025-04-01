@@ -1,3 +1,13 @@
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 3.0"
+    }
+  }
+}
+
+
 provider "azurerm" {
   features {}
 
@@ -43,7 +53,6 @@ resource "azurerm_network_security_rule" "ssh" {
   source_address_prefix       = "*"
   destination_address_prefix  = "*"
   network_security_group_name = azurerm_network_security_group.nsg.name
-  network_security_group_id = azurerm_network_security_group.nsg.id
   resource_group_name         = azurerm_resource_group.rg.name
 }
 
@@ -66,6 +75,8 @@ resource "azurerm_network_interface" "nic" {
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = azurerm_public_ip.public_ip.id
   }
+
+  network_security_group_id = azurerm_network_security_group.nsg.id
 }
 
 resource "azurerm_linux_virtual_machine" "vm" {
