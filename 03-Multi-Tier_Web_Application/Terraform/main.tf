@@ -67,7 +67,7 @@ resource "azurerm_network_interface" "nic" {
   }
 
   # Associate NSG to the NIC
-  network_security_group = azurerm_network_security_group.nsg.id
+  network_security_group = azurerm_network_security_group.nsg
 }
 
 resource "azurerm_linux_virtual_machine" "vm" {
